@@ -1,6 +1,8 @@
 const database = require('../models');
 const peopleCreateService = require('../services/peopleCreate.service');
+const deletePeople = require('../services/peopleDelete.service');
 const listOnePeople = require('../services/peopleListOne.service');
+const updatePeople = require('../services/peopleUpdate.service');
 
 class PeopleController {
   static async create(req, res) {
@@ -24,9 +26,22 @@ class PeopleController {
     return res.status(200).json(onePeople);
   }
 
-  static async update(req, res) {}
+  static async update(req, res) {
+    const { id } = req.params;
+    const newInfos = req.body;
 
-  static async delete(req, res) {}
+    const peopleUpdated = await updatePeople(id, newInfos);
+
+    return res.status(200).json(peopleUpdated);
+  }
+
+  static async delete(req, res) {
+    const { id } = req.params;
+
+    await deletePeople(id);
+
+    return res.status(200).json({message: `ID ${id} deleted with sucess`});
+  }
 }
 
 module.exports = PeopleController;

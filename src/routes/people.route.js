@@ -8,5 +8,7 @@ const route = Router();
 route.post('', emailVerificationMiddleware, PeopleController.create);
 route.get('', PeopleController.listAll);
 route.get('/:id', idVerificationMiddleware, PeopleController.listOne);
+route.put('/:id', idVerificationMiddleware, PeopleController.update);
+route.delete('/:id', idVerificationMiddleware, PeopleController.delete);
 
 module.exports = route;

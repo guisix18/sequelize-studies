@@ -11,6 +11,16 @@ module.exports = {
       start_date: {
         type: Sequelize.DATEONLY
       },
+      subject_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {model: 'Peoples', key: 'id'}
+      },
+      level_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {model: 'Levels', key: 'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

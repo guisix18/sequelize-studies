@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING
   }, {});
   Registration.associate = function(models) {
-    // associations can be defined here
+    Registration.belongsTo(models.Peoples, {foreignKey: 'student_id'});
+    Registration.belongsTo(models.Classes, {foreignKey: 'class_id'});
   };
   return Registration;
 };

@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     start_date: DataTypes.DATEONLY
   }, {});
   Classes.associate = function(models) {
-    // associations can be defined here
+    Classes.hasMany(models.Registration, {foreignKey: 'class_id'});
+    Classes.belongsTo(models.Peoples, {foreignKey: 'subjetc_id'});
+    Classes.belongsTo(models.Levels, {foreignKey: 'level_id'});
   };
   return Classes;
 };

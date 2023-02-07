@@ -1,10 +1,14 @@
 const express = require("express");
-const route = require("./routes/people.route");
+const peoplesRoutes = require("./routes/people.route");
+const levelsRoutes = require("./routes/level.route");
 
+let cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
-app.use('/people', route)
+app.use('/peoples', peoplesRoutes)
+app.use('/levels', levelsRoutes)
 
 const port = 3000;
 

@@ -1,62 +1,46 @@
 const database = require('../models')
 
 class LevelController {
-  static async getAllLevels(req, res){
-    try {
-      const allLevels = await database.Levels.findAll()
-      return res.status(200).json(allLevels)  
-    } catch (error) {
-      return res.status(500).json(error.message)
-    }
+  static async getAllLevels(req, res) {
+
+    const allLevels = await database.Levels.findAll()
+    return res.status(200).json(allLevels)
   }
 
   static async getOneLevel(req, res) {
     const { id } = req.params
-    try {
-      const getOneLevel = await database.Levels.findOne( { 
-        where: { 
-          id: Number(id) 
-        }
-      })
-      return res.status(200).json(getOneLevel)
-    } catch (error) {
-      return res.status(500).json(error.message)
-    }
+
+    const getOneLevel = await database.Levels.findOne({
+      where: {
+        id: Number(id)
+      }
+    })
+    return res.status(200).json(getOneLevel)
   }
 
   static async createLevel(req, res) {
     const newLevel = req.body
-    try {
-      const newLevelCreated = await database.Levels.create(newLevel)
-      return res.status(200).json(newLevelCreated)
-    } catch (error) {
-      return res.status(500).json(error.message)
-    }
+
+    const newLevelCreated = await database.Levels.create(newLevel)
+    return res.status(200).json(newLevelCreated)
   }
 
   static async updateLevel(req, res) {
     const { id } = req.params
     const newInfos = req.body
-    try {
-      await database.Levels.update(newInfos, { where: { id: Number(id) }})
-      const levelUpdated = await database.Levels.findOne( { where: { id: Number(id) }})
-      return res.status(200).json(levelUpdated)
-    } catch (error) {
-      return res.status(500).json(error.message)
-    }
+
+    await database.Levels.update(newInfos, { where: { id: Number(id) } })
+    const levelUpdated = await database.Levels.findOne({ where: { id: Number(id) } })
+    return res.status(200).json(levelUpdated)
   }
 
   static async deleteLevel(req, res) {
     const { id } = req.params
-    try {
-      await database.Levels.destroy({ where: { id: Number(id) }})
-      return res.status(200).json({ message: `ID ${id} deleted with sucess` })
 
-    } catch (error) {
-      return res.status(500).json(error.message)
-    }
+    await database.Levels.destroy({ where: { id: Number(id) } })
+    return res.status(200).json({ message: `ID ${id} deleted with sucess` })
+
   }
-
 }
 
 module.exports = LevelController;
